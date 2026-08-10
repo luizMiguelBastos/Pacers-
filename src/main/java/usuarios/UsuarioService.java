@@ -13,7 +13,7 @@ public class UsuarioService {
         this.usuarioRepository = usuarioRepository;
     }
 
-    private Usuario criarUsuario (Usuario novoUsuario) {
+    public Usuario criarUsuario (Usuario novoUsuario) {
 
         Optional<Usuario> usuaroExistente = usuarioRepository.findByUsername(novoUsuario.getUsername());
 
@@ -22,11 +22,4 @@ public class UsuarioService {
         }
         return usuarioRepository.save(novoUsuario);
     }
-
-
-
-
-
-
-
 }
