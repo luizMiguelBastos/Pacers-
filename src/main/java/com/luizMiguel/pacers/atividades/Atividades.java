@@ -1,30 +1,44 @@
 package com.luizMiguel.pacers.atividades;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
+import jakarta.persistence.*;
 import lombok.Data;
-import org.antlr.v4.runtime.misc.Interval;
+import org.hibernate.annotations.CreationTimestamp;
 
 import java.time.LocalDateTime;
 import java.util.UUID;
 
-@Entity
+@Entity (name = "tb_atividades")
 @Data
 public class Atividades {
 
+    @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
 
-    private enum atividade {
+    private enum TipoAtividade {
         Bicicleta,
         Corrida,
         Caminhada
     }
+    @Enumerated(EnumType.STRING)
+    private TipoAtividade tipoAtividade;
 
-    private Interval duracao;
-    private double distancia;
+    private Integer duracaoEmMinutos;
+    private Double distanciaEmKm;
+    private Double pace;
+
+    @CreationTimestamp
     private LocalDateTime criadoEm;
+
+    @PrePersist
+    @PreUpdate
+    public void calcularPaceAutomaticamente() {
+        if (this.distanciaEmKm != null && this.distanciaEmKm > 0 && this.duracaoEmMinutos != null) {
+            this.pace = this.duracaoEmMinutos / this.distanciaEmKm;
+        } else {
+            this.pace = 0.0;
+        }
+    }
 
 
 

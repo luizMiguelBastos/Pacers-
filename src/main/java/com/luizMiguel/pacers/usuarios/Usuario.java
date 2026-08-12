@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Data
-@Entity
+@Entity (name = "tb_usuario")
 public class Usuario {
 
     private String nome;
