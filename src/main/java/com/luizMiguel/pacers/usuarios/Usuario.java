@@ -1,4 +1,4 @@
-package usuarios;
+package com.luizMiguel.pacers.usuarios;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;

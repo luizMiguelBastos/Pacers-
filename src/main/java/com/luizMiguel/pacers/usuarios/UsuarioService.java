@@ -1,4 +1,4 @@
-package usuarios;
+package com.luizMiguel.pacers.usuarios;
 
 import org.springframework.stereotype.Service;
 
