@@ -15,13 +15,13 @@ public class Atividades {
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
 
-    private enum TipoAtividade {
+    private enum tipoAtividade {
         Bicicleta,
         Corrida,
         Caminhada
     }
     @Enumerated(EnumType.STRING)
-    private TipoAtividade tipoAtividade;
+    private tipoAtividade tipoAtividade;
 
     private Integer duracaoEmMinutos;
     private Double distanciaEmKm;
