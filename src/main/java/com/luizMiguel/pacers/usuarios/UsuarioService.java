@@ -1,5 +1,6 @@
 package com.luizMiguel.pacers.usuarios;
 
+import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -14,12 +15,16 @@ public class UsuarioService {
     }
 
     public Usuario criarUsuario (Usuario novoUsuario) {
+        Optional<Usuario> usuarioExistente = usuarioRepository.findByUsername(novoUsuario.getUsername());
 
-        Optional<Usuario> usuaroExistente = usuarioRepository.findByUsername(novoUsuario.getUsername());
-
-        if (usuaroExistente.isPresent()) {
+        if (usuarioExistente.isPresent()) {
             throw new IllegalArgumentException("Esse username ja esta em uso, tente outro!");
         }
+
+        String senhaPura = novoUsuario.getSenha();
+        String senhaCriptografada = BCrypt.hashpw(senhaPura, BCrypt.gensalt());
+        novoUsuario.setSenha(senhaCriptografada);
+
         return usuarioRepository.save(novoUsuario);
     }
 }
