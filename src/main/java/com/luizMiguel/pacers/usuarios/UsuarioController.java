@@ -27,6 +27,20 @@ public class UsuarioController {
         }
     }
 
+    @PostMapping("/login")
+    public ResponseEntity<String> login(@RequestBody Usuario dadosDeLogin) {
+        try {
+            String tokenGerado = usuarioService.fazerLogin(
+                    dadosDeLogin.getUsername(),
+                    dadosDeLogin.getSenha()
+            );
+            return ResponseEntity.ok(tokenGerado);
+
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(e.getMessage());
+        }
+    }
+
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable UUID id) {
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();

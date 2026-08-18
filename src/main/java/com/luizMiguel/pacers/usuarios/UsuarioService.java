@@ -30,7 +30,7 @@ public class UsuarioService {
     }
 
 
-    public String fazerLogin(String username, String senhaDigitada) {
+    public String fazerLogin (String username, String senhaDigitada) {
         Optional<Usuario> usuarioOptional = usuarioRepository.findByUsername(username);
 
         if (usuarioOptional.isEmpty()) {
