@@ -29,27 +29,4 @@ public class UsuarioService {
         return usuarioRepository.save(novoUsuario);
     }
 
-
-    public String fazerLogin (String username, String senhaDigitada) {
-        Optional<Usuario> usuarioOptional = usuarioRepository.findByUsername(username);
-
-        if (usuarioOptional.isEmpty()) {
-            throw new IllegalArgumentException("Usuário não encontrado!");
-        }
-
-        Usuario usuarioDoBanco = usuarioOptional.get();
-        boolean senhaCorreta = BCrypt.checkpw(senhaDigitada, usuarioDoBanco.getSenha());
-
-        if (!senhaCorreta) {
-            throw new IllegalArgumentException("Senha incorreta!");
-        }
-
-        String novoToken = UUID.randomUUID().toString();
-
-        usuarioDoBanco.setTokenDeAcesso(novoToken);
-        usuarioRepository.save(usuarioDoBanco);
-
-        return novoToken;
-    }
-
 }
