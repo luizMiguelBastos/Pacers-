@@ -1,5 +1,6 @@
 package com.luizMiguel.pacers.usuarios;
 
+import com.luizMiguel.pacers.security.TokenService;
 import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.stereotype.Service;
 
@@ -10,9 +11,11 @@ import java.util.UUID;
 public class UsuarioService {
 
     private final UsuarioRepository usuarioRepository;
+    private final TokenService tokenService;
 
-    public UsuarioService(UsuarioRepository usuarioRepository){
+    public UsuarioService(UsuarioRepository usuarioRepository, TokenService tokenService){
         this.usuarioRepository = usuarioRepository;
+        this.tokenService = tokenService;
     }
 
     public Usuario criarUsuario (Usuario novoUsuario) {
