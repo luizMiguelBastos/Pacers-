@@ -19,3 +19,9 @@ logging:
   level:
     org.springframework.security: TRACE
     org.springframework.web: DEBUG
+
+api:
+  security:
+    token:
+      secret: ${JWT_SECRET}
+

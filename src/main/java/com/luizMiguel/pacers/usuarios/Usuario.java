@@ -14,7 +14,6 @@ import java.util.UUID;
 @Entity (name = "tb_usuario")
 public class Usuario {
 
-    private String tokenDeAcesso;
     private String nome;
     private String username;
     @Id
