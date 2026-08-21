@@ -1,5 +1,6 @@
 package com.luizMiguel.pacers.atividades;
 
+import com.luizMiguel.pacers.usuarios.Usuario;
 import jakarta.persistence.*;
 import lombok.Data;
 import org.hibernate.annotations.CreationTimestamp;
@@ -14,6 +15,10 @@ public class Atividades {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "usuario_id", nullable = false)
+    private Usuario usuario;
 
     private enum tipoAtividade {
         Bicicleta,
